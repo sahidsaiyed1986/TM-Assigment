@@ -7,3 +7,18 @@
 //
 
 import Foundation
+import ObjectMapper
+
+class CommentsModal: Mappable {
+    var message:String?
+    
+    required init?(map: Map) {
+        
+    }
+    
+     func mapping(map: Map) {
+        message <- map ["message"]
+    }
+    
+    
+}

@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+let FEEDURL = "https://api.myjson.com/bins/vt8zx"
+
+typealias GetFeedComplete = () -> ()

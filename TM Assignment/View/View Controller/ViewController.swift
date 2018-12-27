@@ -45,6 +45,11 @@ class ViewController: UIViewController {
     {
         self.activityIndicatorView.stopAnimating()
     }
+    func navigateToCommentView(item:UserFeedResponceModal)  {
+        let commentViewController = self.storyboard!.instantiateViewController(withIdentifier: "commentsview") as! CommnetsViewController
+        commentViewController.usersFeedModel = item
+        self.navigationController!.pushViewController(commentViewController, animated: false)
+    }
    
 }
 // MARK: TABLEVIEW DELEGATE METHODS
@@ -62,16 +67,21 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource{
         feedCell.CommentView.addGestureRecognizer(tapGesture)
         feedCell.CommentView.isUserInteractionEnabled = true
         feedCell.confiqureUserCell(item: self.usersFeedModel[indexPath.row])
+        feedCell.layer.cornerRadius = 10
+        feedCell.layer.masksToBounds = true
         return feedCell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigateToCommentView(item: self.usersFeedModel[indexPath.row])
+    }
     
     //commentView tapped
     @objc func viewTapped(sender: UITapGestureRecognizer) {
        
-        print("testing-testing")
+       
     }
     
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class CommentTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var commentLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +21,7 @@ class CommentTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    func confiqureUserCell(item: CommentsModal){
+        self.commentLabel.text = item.message
+    }
 }
