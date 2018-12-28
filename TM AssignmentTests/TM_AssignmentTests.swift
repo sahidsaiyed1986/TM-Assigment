@@ -2,12 +2,13 @@
 //  TM_AssignmentTests.swift
 //  TM AssignmentTests
 //
-//  Created by apple on 12/26/18.
+//  Created by apple on 12/28/18.
 //  Copyright © 2018 apple. All rights reserved.
 //
 
 import XCTest
 @testable import TM_Assignment
+
 
 class TM_AssignmentTests: XCTestCase {
 
@@ -30,5 +31,13 @@ class TM_AssignmentTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
+    func testGetMoviesSuccessReturnsMovies() {
+        let viewModal:UserFeedViewModal = UserFeedViewModal()
+        var usersFeedModel = [UserFeedResponceModal]()
+        viewModal.getUsersFeed {
+            usersFeedModel = Array(viewModal.usersfeedList)
+            XCTAssertNotNil(usersFeedModel)
+        
+    }
+    }
 }

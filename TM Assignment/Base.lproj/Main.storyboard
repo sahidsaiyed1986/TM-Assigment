@@ -127,12 +127,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <customObject id="fai-do-tbE" customClass="ApiClient" customModule="TM_Assignment" customModuleProvider="target"/>
-                <customObject id="QfV-xj-pkD" customClass="UserFeedViewModal" customModule="TM_Assignment" customModuleProvider="target">
-                    <connections>
-                        <outlet property="apiClient" destination="fai-do-tbE" id="vSO-Ou-r8t"/>
-                    </connections>
-                </customObject>
+                <customObject id="QfV-xj-pkD" customClass="UserFeedViewModal" customModule="TM_Assignment" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1072.8" y="133.5832083958021"/>
         </scene>
