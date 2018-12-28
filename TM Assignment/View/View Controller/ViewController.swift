@@ -92,8 +92,10 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource{
 
     //commentView tapped
     @objc func viewTapped(sender: UITapGestureRecognizer) {
-       
-       
+        let view:UIView = sender.view!
+        let viewPosition:CGPoint = view.convert(CGPoint.zero, to: self.feedTableView)
+        let indexPath:IndexPath = self.feedTableView.indexPathForRow(at: viewPosition)! as IndexPath
+        self.navigateToCommentView(item: self.usersFeedModel[indexPath.row])
     }
     
 }
