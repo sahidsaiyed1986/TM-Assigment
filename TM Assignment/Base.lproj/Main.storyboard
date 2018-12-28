@@ -105,6 +105,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="xqa-W9-dSx"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="hq9-is-nyN"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -119,14 +123,14 @@
                     <navigationItem key="navigationItem" id="JwL-xU-wQd"/>
                     <connections>
                         <outlet property="feedTableView" destination="IdW-UJ-0m6" id="62L-JD-Hda"/>
-                        <outlet property="userFeedViewModal" destination="iam-rR-Pur" id="n4s-NO-U2A"/>
+                        <outlet property="userFeedViewModal" destination="QfV-xj-pkD" id="emf-kB-TYO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <customObject id="U6T-TH-zKQ" customClass="ApiClient" customModule="TM_Assignment" customModuleProvider="target"/>
-                <customObject id="iam-rR-Pur" customClass="UserFeedViewModal" customModule="TM_Assignment" customModuleProvider="target">
+                <customObject id="fai-do-tbE" customClass="ApiClient" customModule="TM_Assignment" customModuleProvider="target"/>
+                <customObject id="QfV-xj-pkD" customClass="UserFeedViewModal" customModule="TM_Assignment" customModuleProvider="target">
                     <connections>
-                        <outlet property="apiClient" destination="U6T-TH-zKQ" id="qeO-8r-MyN"/>
+                        <outlet property="apiClient" destination="fai-do-tbE" id="vSO-Ou-r8t"/>
                     </connections>
                 </customObject>
             </objects>

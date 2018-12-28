@@ -22,6 +22,7 @@ class ApiClient: NSObject {
 
 
     
+    // to feed data Json from the API
     func GetFeed(complete: @escaping GetFeedComplete) {
                 Alamofire.request(FEEDURL).responseObject{ (response: DataResponse<FeedModal>) in
         

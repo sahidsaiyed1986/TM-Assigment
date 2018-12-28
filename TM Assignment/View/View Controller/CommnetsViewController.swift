@@ -23,15 +23,7 @@ class CommnetsViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+   
 
 }
 // MARK: TABLEVIEW DELEGATE METHODS
@@ -54,11 +46,13 @@ extension CommnetsViewController:UITableViewDelegate,UITableViewDataSource{
         {
         let feedCell = tableView.dequeueReusableCell(withIdentifier: "feedcell", for: indexPath) as! FeedTableViewCell
             feedCell.confiqureUserCell(item: self.usersFeedModel)
+            feedCell.selectionStyle = UITableViewCell.SelectionStyle.none
         return feedCell
         }
         else{
             let commentCell = tableView.dequeueReusableCell(withIdentifier: "commentcell", for: indexPath) as! CommentTableViewCell
             commentCell.confiqureUserCell(item: self.commentsModal[indexPath.row])
+            commentCell.selectionStyle = UITableViewCell.SelectionStyle.none
             return commentCell
         }
     }
@@ -68,9 +62,15 @@ extension CommnetsViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1
         {
-            let label = UILabel()
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            let label = UILabel(frame: CGRect(x: 15, y: 5, width: tableView.frame.width, height: 20))
             label.text = "\(commentsModal.count) Comments"
-            return label
+            label.textAlignment = NSTextAlignment.left
+            label.font = label.font.withSize(18)
+            view.addSubview(label)
+            return view
+            
+            
         }
         return nil
     }

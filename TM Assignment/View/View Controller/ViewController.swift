@@ -13,26 +13,38 @@ class ViewController: UIViewController {
     @IBOutlet weak var feedTableView: UITableView!
     var usersFeedModel = [UserFeedResponceModal]()
     var activityIndicatorView: ActivityIndicatorView!
+    var isDataLoading:Bool=false
     
-    @IBOutlet var userFeedViewModal: UserFeedViewModal!
+    
+    
+    
+   @IBOutlet var userFeedViewModal: UserFeedViewModal!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "FEED"
-        feedTableView.delegate = self
-        feedTableView.dataSource = self
+        self.startloading()
         self.gateNewFeed()
         
+        
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+    }
+     // get new feed
     func gateNewFeed(){
-        self.startloading()
+      
         self.userFeedViewModal.getUsersFeed {
             self.usersFeedModel = Array(self.userFeedViewModal.usersfeedList)
             print(self.usersFeedModel.count)
-            self.stopLoading()
+            self.isDataLoading = false
             self.feedTableView.reloadData()
+           self.stopLoading()
         }
     }
+     // start loading
     func startloading()
     {
         self.activityIndicatorView = ActivityIndicatorView(title: "Fetching Feeds...", center: self.view.center,controller:self)
@@ -48,27 +60,26 @@ class ViewController: UIViewController {
     func navigateToCommentView(item:UserFeedResponceModal)  {
         let commentViewController = self.storyboard!.instantiateViewController(withIdentifier: "commentsview") as! CommnetsViewController
         commentViewController.usersFeedModel = item
-        self.navigationController!.pushViewController(commentViewController, animated: false)
+        self.navigationController!.pushViewController(commentViewController, animated: true)
     }
    
 }
 // MARK: TABLEVIEW DELEGATE METHODS
 extension ViewController:UITableViewDelegate,UITableViewDataSource{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usersFeedModel.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let feedCell = tableView.dequeueReusableCell(withIdentifier: "feedcell", for: indexPath) as! FeedTableViewCell
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped(sender:)))
         feedCell.CommentView.addGestureRecognizer(tapGesture)
         feedCell.CommentView.isUserInteractionEnabled = true
         feedCell.confiqureUserCell(item: self.usersFeedModel[indexPath.row])
-        feedCell.layer.cornerRadius = 10
-        feedCell.layer.masksToBounds = true
+        feedCell.selectionStyle = UITableViewCell.SelectionStyle.none
         return feedCell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -77,7 +88,8 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.navigateToCommentView(item: self.usersFeedModel[indexPath.row])
     }
-    
+
+
     //commentView tapped
     @objc func viewTapped(sender: UITapGestureRecognizer) {
        
@@ -87,15 +99,28 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource{
 }
 // MARK: ScrollView DELEGATE METHODS
 extension ViewController:UIScrollViewDelegate{
+
+
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isDataLoading = false
+    }
+
+
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+
+    }
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
-        
-        let currentOffset = scrollView.contentOffset.y
-        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-        
-       
-        if maximumOffset - currentOffset <= 20.0 {
-            self.gateNewFeed()
+
+
+        if ((feedTableView.contentOffset.y + feedTableView.frame.size.height) >= feedTableView.contentSize.height)
+        {
+            if !isDataLoading{
+                isDataLoading = true
+                self.gateNewFeed()
+
+            }
         }
     }
 }

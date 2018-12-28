@@ -11,8 +11,7 @@ import UIKit
 class UserFeedViewModal: NSObject {
     //Create apiClient property that we can use to call in our API Call.
     //This apiClient property is marked as an @IBOutlet so that we can instantiate it from the storyboard.  I mark this with a bang operator (!) since I know it will not be nil since the storyboard will be injecting it.
-    @IBOutlet weak var apiClient: ApiClient!
-   
+   @IBOutlet weak var apiClient: ApiClient!
     var usersfeedList = [UserFeedResponceModal]()
 
     func getUsersFeed(complete:@escaping GetFeedComplete)  {
@@ -21,7 +20,5 @@ class UserFeedViewModal: NSObject {
             complete()
         }
     }
-        func numberOfItemsToDisplay(in section: Int) -> Int {
-            return usersfeedList.count
-        }
+       
 }
