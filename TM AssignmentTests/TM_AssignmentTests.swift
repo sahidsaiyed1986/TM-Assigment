@@ -31,7 +31,7 @@ class TM_AssignmentTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-    func testGetMoviesSuccessReturnsMovies() {
+    func testGetFeeds() {
         let viewModal:UserFeedViewModal = UserFeedViewModal()
         var usersFeedModel = [UserFeedResponceModal]()
         viewModal.getUsersFeed {
